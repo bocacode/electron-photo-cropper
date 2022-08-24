@@ -15,10 +15,10 @@ export function resolveHtmlPath(htmlFileName: string) {
 
 export async function saveCroppedImage(newFileName: string, base64data: any) {
   fs.writeFile(newFileName, base64data, 'base64', (err) => {
-    if(err) {
+    if (err) {
       console.error(err);
     } else {
-      console.log("---- SUCCESS ----");
+      console.log('---- SUCCESS ----');
     }
   });
 }

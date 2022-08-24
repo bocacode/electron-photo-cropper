@@ -1,3 +1,5 @@
+import { Area } from 'react-easy-crop/types';
+
 export function readFile(file: any) {
   return new Promise((resolve) => {
     const reader = new FileReader();
@@ -6,13 +8,9 @@ export function readFile(file: any) {
   });
 }
 
-
-function createImage(url: any) {
-  console.log('function called...')
+function createImage(url: string) {
   return new Promise((resolve, reject) => {
-    console.log('inside promise')
     const image = new Image();
-    console.log('image created')
     image.addEventListener('load', () => resolve(image));
     image.addEventListener('error', (err) => reject(err));
     image.setAttribute('crossOrigin', 'anonymous');
@@ -20,7 +18,7 @@ function createImage(url: any) {
   });
 }
 
-export async function cropImageData(imageSrc: any, croppedAreaPixels: any) {
+export async function cropImageData(imageSrc: any, croppedAreaPixels: Area) {
   const image: any = await createImage(imageSrc);
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');

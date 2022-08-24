@@ -14,7 +14,7 @@ export default function Photo() {
   const [filename, setFilename] = useState(null); // file address
 
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
-  const onCropComplete = useCallback((croppedArea: Area, currentCroppedAreaPixels: Area) => {
+  const onCropComplete = useCallback((_croppedArea: Area, currentCroppedAreaPixels: Area) => {
     setCroppedAreaPixels(currentCroppedAreaPixels);
   }, []);
 
@@ -33,7 +33,7 @@ export default function Photo() {
   const handleSave = async () => {
     // first save the cropped image
     // window.electron.setTitle('IT WORKED still');
-    const base64data = await cropImageData(imageSrc, croppedAreaPixels)
+    const base64data = await cropImageData(imageSrc, croppedAreaPixels!)
       .catch(console.error);
     const newFileName = `${filename}-cropped.png`;
     window.electron.saveCroppedImage([newFileName, base64data]);
