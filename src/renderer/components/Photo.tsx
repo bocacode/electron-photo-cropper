@@ -3,9 +3,6 @@ import Cropper from 'react-easy-crop';
 import { Area } from 'react-easy-crop/types';
 import { readFile, cropImageData } from '../../main/helpers';
 
-// const electron = window.require('electron');
-
-
 export default function Photo() {
 
   const [imageSrc, setImageSrc] = useState(null); // file data
