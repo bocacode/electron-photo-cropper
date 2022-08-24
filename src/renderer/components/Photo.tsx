@@ -1,9 +1,10 @@
 import { useState, useCallback } from 'react';
 import Cropper from 'react-easy-crop';
 import { Area } from 'react-easy-crop/types';
-import { readFile,
-  // saveCroppedImage
- } from '../../main/helpers';
+import { readFile, cropImageData } from '../../main/helpers';
+
+// const electron = window.require('electron');
+
 
 export default function Photo() {
 
@@ -29,13 +30,16 @@ export default function Photo() {
     }
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     // first save the cropped image
-    // saveCroppedImage(filename, imageSrc, croppedAreaPixels);
-    // then reset the interface
-    setImageSrc(null);
-    setZoom(1);
-    setCrop({ x: 0, y: 0 });
+    // window.electron.setTitle('IT WORKED still');
+    const base64data = await cropImageData(imageSrc, croppedAreaPixels)
+      .catch(console.error);
+    const newFileName = `${filename}-cropped.png`;
+    window.electron.saveCroppedImage([newFileName, base64data]);
+      setImageSrc(null);
+      setZoom(1);
+      setCrop({ x: 0, y: 0 });
   }
 
   if(!imageSrc) {
